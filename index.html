@@ -1,61 +1,106 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FlowMo | タスクをもっとスマートに</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowMo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
       margin: 0;
-      padding: 2rem;
-      background-color: #f8f9fa;
-      color: #333;
-      line-height: 1.6;
+      color: white;
     }
     header {
       text-align: center;
-      margin-bottom: 2rem;
+      padding: 3rem 1rem 2rem;
     }
-    h1 {
+    header h1 {
       font-size: 2rem;
-      margin: 0.5rem 0;
+      margin-bottom: 0.5rem;
     }
-    p {
-      max-width: 600px;
-      margin: 0 auto 1rem;
+    header p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 2rem;
+      gap: 2rem;
+    }
+    .card {
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      max-width: 300px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .card img {
+      max-width: 100%;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
     }
     footer {
-      margin-top: 3rem;
       text-align: center;
-      font-size: 0.875rem;
-      color: #888;
-    }
-    a.button {
-      display: inline-block;
-      background-color: #4a90e2;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: 6px;
-      text-decoration: none;
-      margin-top: 1rem;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      opacity: 0.8;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>FlowMo</h1>
-    <p>タスク管理をもっとスマートに。習慣化・ポモドーロ・集中タイマーを1つに。</p>
-    <a class="button" href="https://apps.apple.com/jp/app/flowmo/id6755710229" target="_blank" rel="noopener">App Storeで見る</a>
+    <h1>集中するためのタスク管理アプリ</h1>
+    <p>シンプルに、そしてスマートに。あなたの努力を可視化する。</p>
   </header>
 
-  <main>
-    <p>FlowMo は、あらゆる作業を効率よくこなすための iOS アプリです。洗練されたUIと、シンプルながら柔軟なタスク設計で、集中と習慣のサイクルを支援します。</p>
-    <p>ポモドーロタイマー、習慣トラッカー、通知、分析などの機能を一体化し、1日の流れをスムーズに。</p>
-  </main>
+  <section class="features">
+    <div class="card">
+      <img src="Slice 2.png" alt="シンプル故に集中できる">
+      <h2>シンプル故に集中できる</h2>
+      <p>余計な機能を削ぎ落とし、タスクにだけ向き合えるミニマル設計。</p>
+    </div>
+    <div class="card">
+      <img src="Slice 3.png" alt="Todo をストレスなく整理">
+      <h2>Todo をストレスなく整理</h2>
+      <p>カテゴリや優先度で整理されたタスク画面で、毎日がもっと効率的に。</p>
+    </div>
+    <div class="card">
+      <img src="Slice 4.png" alt="自分だけのポモドーロ">
+      <h2>自分だけのポモドーロ</h2>
+      <p>あなたの集中リズムに合わせて、作業と休憩を最適化。</p>
+    </div>
+    <div class="card">
+      <img src="Slice 5.png" alt="努力を数字で実感">
+      <h2>努力を“数字”で実感</h2>
+      <p>日々の積み重ねを可視化して、成長をモチベーションに。</p>
+    </div>
+    <div class="card">
+      <img src="Slice 6.png" alt="ドットで見える化">
+      <h2>ドットで見える化</h2>
+      <p>習慣化の進捗をヒートマップで確認、継続しやすい仕組み。</p>
+    </div>
+    <div class="card">
+      <img src="Slice 7.png" alt="テーマカスタマイズ">
+      <h2>あなたらしさをカスタマイズ</h2>
+      <p>白・黒・ダークグリーンなど、複数テーマであなたの気分にフィット。</p>
+    </div>
+  </section>
 
   <footer>
-    &copy; 2025 FlowMo. All rights reserved.
+    &copy; 2025 集中タスクアプリ. All rights reserved.
   </footer>
 </body>
 </html>
