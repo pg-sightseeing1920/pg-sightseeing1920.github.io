@@ -3,105 +3,517 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FlowMo | タスクをもっとスマートに</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <title>FlowMo | シンプルに集中できるタスク管理</title>
+  <meta name="description" content="FlowMoは、シンプルなタスク管理・習慣トラッキング・ポモドーロで集中と継続を支えるアプリです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #07070b;
+      --surface: #111216;
+      --surface-2: #171922;
+      --line: rgba(255, 255, 255, 0.14);
+      --text: #f4f4f8;
+      --muted: #afb2c1;
+      --purple: #8256f4;
+      --purple-2: #6c47d8;
+      --green: #2ecc71;
+      --max: 1120px;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Noto Sans JP', sans-serif;
-      background: linear-gradient(to right, #6a11cb, #2575fc);
       margin: 0;
-      color: white;
+      color: var(--text);
+      font-family: "Noto Sans JP", sans-serif;
+      background:
+        radial-gradient(860px 460px at 50% -10%, rgba(130, 86, 244, 0.35), transparent 60%),
+        linear-gradient(180deg, #0a0a10 0%, #07070b 100%);
+      line-height: 1.6;
     }
-    header {
-      text-align: center;
-      padding: 3rem 1rem 2rem;
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(var(--max), 92vw);
+      margin: 0 auto;
     }
-    header h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(7, 7, 11, 0.82);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
     }
-    header p {
-      font-size: 1rem;
-      opacity: 0.9;
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 0;
+      gap: 1rem;
     }
-    .features {
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.08rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-dot {
+      width: 0.72rem;
+      height: 0.72rem;
+      border-radius: 50%;
+      background: linear-gradient(130deg, var(--purple), #a48bff);
+      box-shadow: 0 0 18px rgba(130, 86, 244, 0.7);
+    }
+
+    .nav-cta,
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.6rem;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      background: linear-gradient(120deg, var(--purple), var(--purple-2));
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 12px 26px rgba(130, 86, 244, 0.25);
+      transition: transform 0.2s ease;
+    }
+
+    .nav-cta:hover,
+    .btn-primary:hover { transform: translateY(-2px); }
+
+    .hero {
+      padding: 3.2rem 0 2.2rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.04fr 1fr;
+      gap: 1.6rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(130, 86, 244, 0.14);
+      color: #d8cbff;
+      font-size: 0.76rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.65rem;
+    }
+
+    h1 {
+      margin: 0.9rem 0 1rem;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      max-width: 56ch;
+    }
+
+    .hero-actions {
+      margin-top: 1.25rem;
       display: flex;
       flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
-      padding: 2rem;
-      gap: 2rem;
-    }
-    .card {
-      background-color: rgba(0, 0, 0, 0.3);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      max-width: 300px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .card h2 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-    .card p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-    .card img {
-      max-width: 100%;
-      border-radius: 1rem;
-      margin-bottom: 1rem;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
+      min-height: 2.6rem;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
       font-size: 0.9rem;
-      opacity: 0.8;
+      font-weight: 600;
+    }
+
+    .hero-shot {
+      border-radius: 1.25rem;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: var(--shadow);
+      background: #09090d;
+    }
+
+    .hero-shot img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+    }
+
+    .section {
+      padding: 3rem 0;
+    }
+
+    .section h2 {
+      margin: 0 0 0.65rem;
+      font-size: clamp(1.45rem, 2.6vw, 2rem);
+      line-height: 1.25;
+    }
+
+    .section p.section-sub {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .feature-grid {
+      margin-top: 1.2rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .feature {
+      border-radius: 1rem;
+      background: linear-gradient(180deg, rgba(130, 86, 244, 0.13), rgba(255, 255, 255, 0.03));
+      border: 1px solid var(--line);
+      padding: 1rem;
+    }
+
+    .feature h3 {
+      margin: 0.15rem 0 0.35rem;
+      font-size: 1rem;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .screen-grid {
+      margin-top: 1.3rem;
+      display: grid;
+      gap: 0.9rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .screen {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .screen img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      background: #09090d;
+    }
+
+    .screen figcaption {
+      padding: 0.7rem 0.75rem 0.8rem;
+      font-size: 0.88rem;
+      color: #d8dbeb;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--surface-2);
+    }
+
+    .plans {
+      margin-top: 1.3rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .plan {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      padding: 1rem;
+    }
+
+    .plan h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .price {
+      margin-top: 0.45rem;
+      font-size: 1.52rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .price small {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 500;
+      margin-left: 0.3rem;
+    }
+
+    .plan ul {
+      margin: 0.9rem 0 0;
+      padding-left: 1.05rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .plan li + li { margin-top: 0.4rem; }
+
+    .plan.premium {
+      border-color: rgba(130, 86, 244, 0.62);
+      background: linear-gradient(180deg, rgba(130, 86, 244, 0.2), rgba(255, 255, 255, 0.04));
+    }
+
+    .plan-note {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .premium-sheet {
+      margin-top: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #09090d;
+    }
+
+    .premium-sheet img {
+      width: 100%;
+      display: block;
+      max-height: 420px;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .final {
+      padding: 3.3rem 0 3.8rem;
+    }
+
+    .final-box {
+      border-radius: 1.2rem;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(120% 180% at 20% 10%, rgba(130, 86, 244, 0.4), transparent 48%),
+        rgba(255, 255, 255, 0.04);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .final-box h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      line-height: 1.25;
+    }
+
+    .final-box p {
+      margin: 0.8rem auto 1.15rem;
+      color: #d4d8ea;
+      max-width: 58ch;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      color: var(--muted);
+      padding: 1.1rem 0 1.5rem;
+      font-size: 0.86rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .feature-grid,
+      .screen-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .plans { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .hero-grid,
+      .feature-grid,
+      .screen-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions a { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>集中するためのタスク管理アプリ</h1>
-    <p>シンプルに、そしてスマートに。あなたの努力を可視化する。</p>
-    <a class="button" href="https://apps.apple.com/jp/app/flowmo/id6755710229" target="_blank" rel="noopener">App Storeで見る</a>
-  </header>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand"><span class="brand-dot"></span><span>FlowMo</span></a>
+      <a class="nav-cta" href="https://apps.apple.com/jp/app/flowmo/id6755710229" target="_blank" rel="noopener">App Storeで見る</a>
+    </div>
+  </nav>
 
-  <section class="features">
-    <div class="card">
-      <img src="Slice 2.png" alt="シンプル故に集中できる">
-      <h2>シンプル故に集中できる</h2>
-      <p>余計な機能を削ぎ落とし、タスクにだけ向き合えるミニマル設計。</p>
-    </div>
-    <div class="card">
-      <img src="Slice 3.png" alt="Todo をストレスなく整理">
-      <h2>Todo をストレスなく整理</h2>
-      <p>カテゴリや優先度で整理されたタスク画面で、毎日がもっと効率的に。</p>
-    </div>
-    <div class="card">
-      <img src="Slice 4.png" alt="自分だけのポモドーロ">
-      <h2>自分だけのポモドーロ</h2>
-      <p>あなたの集中リズムに合わせて、作業と休憩を最適化。</p>
-    </div>
-    <div class="card">
-      <img src="Slice 5.png" alt="努力を数字で実感">
-      <h2>努力を“数字”で実感</h2>
-      <p>日々の積み重ねを可視化して、成長をモチベーションに。</p>
-    </div>
-    <div class="card">
-      <img src="Slice 6.png" alt="ドットで見える化">
-      <h2>ドットで見える化</h2>
-      <p>習慣化の進捗をヒートマップで確認、継続しやすい仕組み。</p>
-    </div>
-    <div class="card">
-      <img src="Slice 7.png" alt="テーマカスタマイズ">
-      <h2>あなたらしさをカスタマイズ</h2>
-      <p>白・黒・ダークグリーンなど、複数テーマであなたの気分にフィット。</p>
-    </div>
-  </section>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">FlowMo Productivity App</span>
+          <h1>シンプル故に集中できる。<br>FlowMoで、毎日の生産性を整える。</h1>
+          <p class="lead">タスク整理、習慣トラッキング、ポモドーロ、進捗の可視化まで。黒基調のミニマルUIで、やるべきことにだけ向き合える設計です。</p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="https://apps.apple.com/jp/app/flowmo/id6755710229" target="_blank" rel="noopener">今すぐダウンロード</a>
+            <a class="btn-ghost" href="#screens">アプリ画面を見る</a>
+          </div>
+        </div>
+        <figure class="hero-shot">
+          <img src="assets/images/home-dark.png" alt="FlowMo ホーム画面">
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>FlowMoでできること</h2>
+        <p class="section-sub">実際のアプリ体験に近いトーンで、主要機能を整理しました。</p>
+        <div class="feature-grid">
+          <article class="feature">
+            <h3>Todoをストレスなく整理</h3>
+            <p>優先度・カテゴリでタスクを管理し、毎日やることを明確化します。</p>
+          </article>
+          <article class="feature">
+            <h3>ドットで習慣を見える化</h3>
+            <p>連続記録やヒートマップで、継続の状態を直感的に把握できます。</p>
+          </article>
+          <article class="feature">
+            <h3>努力を数字で実感</h3>
+            <p>作成数・完了数・達成率などをダッシュボードで確認できます。</p>
+          </article>
+          <article class="feature">
+            <h3>自分だけのポモドーロ</h3>
+            <p>作業と休憩のリズムを整え、深い集中に入りやすくします。</p>
+          </article>
+          <article class="feature">
+            <h3>テーマカスタマイズ</h3>
+            <p>ダーク、ライト、モカ、ネイチャーなどから好みの雰囲気を選べます。</p>
+          </article>
+          <article class="feature">
+            <h3>設定・同期もシンプル</h3>
+            <p>必要な設定だけに絞り、毎日迷わず使える導線を重視しています。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="screens">
+      <div class="container">
+        <h2>実際のアプリ画面</h2>
+        <p class="section-sub">添付いただいたスクリーンショットをそのまま反映しています。</p>
+        <div class="screen-grid">
+          <figure class="screen">
+            <img src="assets/images/home-dark.png" alt="ホーム画面">
+            <figcaption>ホーム: 今日のおすすめとタスク一覧</figcaption>
+          </figure>
+          <figure class="screen">
+            <img src="assets/images/habits.png" alt="習慣画面">
+            <figcaption>習慣: ドットヒートマップで継続を可視化</figcaption>
+          </figure>
+          <figure class="screen">
+            <img src="assets/images/dashboard.png" alt="ダッシュボード画面">
+            <figcaption>ダッシュボード: 成長を数値で確認</figcaption>
+          </figure>
+          <figure class="screen">
+            <img src="assets/images/pomodoro.png" alt="ポモドーロ画面">
+            <figcaption>ポモドーロ: 集中セッションを管理</figcaption>
+          </figure>
+          <figure class="screen">
+            <img src="assets/images/theme.png" alt="テーマ設定画面">
+            <figcaption>テーマ: 配色をあなたらしくカスタマイズ</figcaption>
+          </figure>
+          <figure class="screen">
+            <img src="assets/images/settings.png" alt="設定画面">
+            <figcaption>設定: アカウント・言語・通知を簡単設定</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="plans">
+      <div class="container">
+        <h2>料金プラン</h2>
+        <p class="section-sub">現在は Free と Premium の2プランです。</p>
+        <div class="plans">
+          <article class="plan">
+            <h3>Free</h3>
+            <p class="price">¥0<small>/月</small></p>
+            <ul>
+              <li>基本タスク管理</li>
+              <li>習慣トラッキング（基本）</li>
+              <li>広告表示あり</li>
+            </ul>
+          </article>
+          <article class="plan premium">
+            <h3>Premium</h3>
+            <p class="price">¥400 / $1.99<small>/月</small></p>
+            <ul>
+              <li>広告なし</li>
+              <li>無制限タスク</li>
+              <li>テーマカラー選択</li>
+              <li>クラウド同期（複数デバイス）</li>
+              <li>ルールベース + AI分析</li>
+              <li>AIによる月次レポート</li>
+              <li>カスタムカテゴリ作成</li>
+              <li>ポモドーロタイマー</li>
+            </ul>
+          </article>
+        </div>
+        <p class="plan-note">価格は地域・為替により変動する場合があります。</p>
+        <figure class="premium-sheet">
+          <img src="assets/images/upgrade-sheet.png" alt="Premiumアップグレード画面">
+        </figure>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="container">
+        <div class="final-box">
+          <h2>FlowMoで、今日の集中を積み上げる。</h2>
+          <p>まずは無料で始めて、必要になったタイミングでPremiumへ。シンプルなUIで、毎日の「やる」を前に進めます。</p>
+          <a class="btn-primary" href="https://apps.apple.com/jp/app/flowmo/id6755710229" target="_blank" rel="noopener">App Storeで試す</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    &copy; 2025 FlowMo. All rights reserved.
+    <div style="display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap;margin-bottom:.35rem;">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+    </div>
+    <div>&copy; 2026 FlowMo. All rights reserved.</div>
   </footer>
 </body>
 </html>

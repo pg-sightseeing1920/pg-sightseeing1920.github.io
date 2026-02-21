@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowMo | サポート</title>
+  <meta name="description" content="FlowMo サポートページ">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#07070b; --surface:#111216; --line:rgba(255,255,255,.14); --text:#f4f4f8; --muted:#afb2c1; --purple:#8256f4; --max:980px; }
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(760px 420px at 50% -10%, rgba(130,86,244,.3), transparent 60%),linear-gradient(180deg,#0a0a10,#07070b);color:var(--text);font-family:"Noto Sans JP",sans-serif;line-height:1.75}
+    a{color:#d9cfff} .container{width:min(var(--max),92vw);margin:0 auto}
+    .nav{position:sticky;top:0;background:rgba(7,7,11,.84);border-bottom:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px)}
+    .nav-inner{display:flex;justify-content:space-between;align-items:center;padding:.85rem 0;gap:1rem}
+    .brand{display:inline-flex;align-items:center;gap:.5rem;font-weight:800;color:#fff;text-decoration:none}
+    .dot{width:.72rem;height:.72rem;border-radius:999px;background:linear-gradient(130deg,var(--purple),#a48bff);box-shadow:0 0 18px rgba(130,86,244,.7)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:.5rem .95rem;border-radius:999px;text-decoration:none;color:#fff;border:1px solid var(--line);background:rgba(255,255,255,.05)}
+    main{padding:2rem 0 3rem}.hero h1{margin:.1rem 0 .4rem;font-size:clamp(1.6rem,4vw,2.2rem)} .hero p{margin:0;color:var(--muted)}
+    .faq{margin-top:1rem;display:grid;gap:.8rem}
+    .item{border:1px solid var(--line);border-radius:1rem;background:var(--surface);padding:1rem}
+    .item h2{font-size:1rem;margin:0 0 .45rem}
+    ul{margin:.2rem 0 0;padding-left:1.2rem} li+li{margin-top:.35rem}
+    .contact{margin-top:1rem;border:1px solid var(--line);border-radius:1rem;background:linear-gradient(180deg, rgba(130,86,244,.2), rgba(255,255,255,.03));padding:1rem}
+    .links{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.7rem}
+    footer{border-top:1px solid rgba(255,255,255,.1);text-align:center;color:var(--muted);padding:1rem 0 1.4rem;font-size:.86rem}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="container nav-inner"><a href="index.html" class="brand"><span class="dot"></span><span>FlowMo</span></a><a href="index.html" class="btn">トップへ戻る</a></div></nav>
+  <main>
+    <section class="container hero">
+      <h1>FlowMo サポート</h1>
+      <p>FAQとお問い合わせ窓口をまとめています。</p>
+
+      <div class="faq">
+        <article class="item">
+          <h2>1. ログインできません</h2>
+          <ul>
+            <li>メールアドレスとパスワードが正しいか確認してください</li>
+            <li>通信環境が安定しているか確認してください</li>
+            <li>解決しない場合はサポートへご連絡ください</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h2>2. プレミアムプランが反映されません</h2>
+          <ul>
+            <li>iOS 設定 > Apple ID > サブスクリプションで購入状態を確認してください</li>
+            <li>アプリ内の「購入を復元」を実行してください</li>
+            <li>解決しない場合はメールでお問い合わせください</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h2>3. サブスクリプションを解約したい</h2>
+          <p>サブスクリプションはアプリ内ではなく Apple ID から管理されます。</p>
+          <p><a href="https://apps.apple.com/account/subscriptions" target="_blank" rel="noopener">https://apps.apple.com/account/subscriptions</a></p>
+        </article>
+
+        <article class="item">
+          <h2>4. アプリが正常に動作しません</h2>
+          <ul>
+            <li>アプリを最新版にアップデートしてください</li>
+            <li>端末を再起動してください</li>
+            <li>改善しない場合はサポートへご連絡ください</li>
+          </ul>
+        </article>
+      </div>
+
+      <section class="contact">
+        <h2>お問い合わせ</h2>
+        <p>ご不明点は <a href="mailto:flowmo130@gmail.com">flowmo130@gmail.com</a> までご連絡ください。</p>
+        <div class="links">
+          <a href="privacy.html">プライバシーポリシー</a>
+          <a href="terms.html">利用規約</a>
+          <a href="https://apps.apple.com/jp/app/flowmo/id6755710229" target="_blank" rel="noopener">App Store</a>
+        </div>
+      </section>
+    </section>
+  </main>
+  <footer>&copy; 2026 FlowMo. All rights reserved.</footer>
+</body>
+</html>
