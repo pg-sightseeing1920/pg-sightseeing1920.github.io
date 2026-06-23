@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サクタン | スワイプでサクッと覚える英単語</title>
+  <meta name="description" content="サクタンは、隙間時間にスワイプ操作だけで英単語を復習できる単語学習アプリです。中学英語から大学受験レベルまで、テンポよく覚えられます。">
+  <style>
+    :root {
+      --ink: #111d35;
+      --muted: #718096;
+      --bg: #effbf8;
+      --mint: #1fc0a0;
+      --mint-deep: #10a88d;
+      --mint-soft: #e8f7f3;
+      --night: #0e1828;
+      --night-card: #172337;
+      --line: #d6ebe6;
+      --coral: #ff6b6b;
+      --white: #ffffff;
+      --max: 1120px;
+      --shadow: 0 26px 64px rgba(11, 37, 62, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(239, 251, 248, 0.96), rgba(232, 247, 243, 0.8)),
+        var(--bg);
+      line-height: 1.7;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(239, 251, 248, 0.86);
+      border-bottom: 1px solid rgba(17, 29, 53, 0.08);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.08rem;
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: var(--mint);
+      box-shadow: 0 12px 28px rgba(31, 192, 160, 0.28);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.94rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 999px;
+      font-weight: 900;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+      cursor: pointer;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      color: var(--white);
+      background: var(--mint);
+      box-shadow: 0 18px 34px rgba(31, 192, 160, 0.24);
+    }
+
+    .button-ghost {
+      color: var(--ink);
+      background: var(--white);
+      border: 2px solid var(--line);
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    .hero {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      min-height: calc(100vh - 76px);
+      padding: 48px 0 64px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
+      gap: 44px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      padding-bottom: 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      color: var(--mint-deep);
+      background: var(--mint-soft);
+      border: 2px solid var(--line);
+      font-size: 0.9rem;
+      font-weight: 900;
+    }
+
+    h1 {
+      margin: 22px 0 18px;
+      font-size: clamp(3.6rem, 9vw, 7.2rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 35rem;
+      color: #526177;
+      font-size: clamp(1.05rem, 2vw, 1.32rem);
+      font-weight: 700;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 34px;
+      max-width: 600px;
+    }
+
+    .point {
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 2px solid var(--line);
+      font-weight: 900;
+    }
+
+    .point span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .phone-wrap {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      isolation: isolate;
+    }
+
+    .phone-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 8% auto auto 6%;
+      width: 88%;
+      height: 84%;
+      border-radius: 48px;
+      background: var(--night);
+      transform: rotate(-4deg);
+      z-index: -1;
+      box-shadow: var(--shadow);
+    }
+
+    .phone-wrap img {
+      width: min(100%, 370px);
+      filter: drop-shadow(0 22px 48px rgba(17, 29, 53, 0.22));
+    }
+
+    .section {
+      padding: 72px 16px;
+    }
+
+    .section-inner {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      margin: 10px 0 0;
+      max-width: 34rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature {
+      padding: 28px;
+      min-height: 230px;
+      border-radius: 28px;
+      background: var(--white);
+      border: 2px solid var(--line);
+      box-shadow: 0 16px 34px rgba(17, 29, 53, 0.06);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 19px;
+      display: grid;
+      place-items: center;
+      color: var(--mint);
+      background: var(--mint-soft);
+      margin-bottom: 20px;
+    }
+
+    .feature h3 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+      line-height: 1.35;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .dark-band {
+      color: var(--white);
+      background: var(--night);
+    }
+
+    .dark-band .section-head p {
+      color: #aeb8ca;
+    }
+
+    .screens {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .screen-card {
+      border-radius: 34px;
+      border: 2px solid rgba(113, 128, 150, 0.3);
+      background: var(--night-card);
+      padding: 28px;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .study-card {
+      border-radius: 30px;
+      border: 2px solid #344766;
+      padding: 28px;
+      background: #162238;
+    }
+
+    .study-top {
+      display: flex;
+      justify-content: space-between;
+      color: #aeb8ca;
+      font-weight: 900;
+    }
+
+    .level {
+      color: #56e8c8;
+      background: #243551;
+      border: 2px solid #344766;
+      border-radius: 999px;
+      padding: 6px 16px;
+    }
+
+    .word {
+      margin: 48px 0 8px;
+      font-size: clamp(3rem, 7vw, 5.7rem);
+      line-height: 0.95;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .pron {
+      color: #aeb8ca;
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .meaning {
+      margin: 30px auto;
+      text-align: center;
+      color: #56e8c8;
+      font-weight: 900;
+    }
+
+    .answer-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: end;
+      padding-top: 14px;
+      font-weight: 900;
+    }
+
+    .answer-row .no {
+      color: var(--coral);
+    }
+
+    .answer-row .yes {
+      color: #48dcae;
+    }
+
+    .answer-mark {
+      display: block;
+      font-size: 4.2rem;
+      line-height: 1;
+    }
+
+    .deck-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .deck-item {
+      padding: 20px 22px;
+      border: 2px solid var(--mint);
+      border-radius: 24px;
+      background: rgba(232, 247, 243, 0.08);
+    }
+
+    .deck-item strong {
+      display: block;
+      font-size: 1.35rem;
+      margin-bottom: 2px;
+    }
+
+    .deck-item span {
+      color: #aeb8ca;
+      font-weight: 800;
+    }
+
+    .cta {
+      padding: 84px 16px;
+      background: var(--bg);
+    }
+
+    .cta-box {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      padding: 44px;
+      border-radius: 36px;
+      background: var(--white);
+      border: 2px solid var(--line);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+    }
+
+    .cta p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .site-footer {
+      padding: 32px 16px 46px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .footer-inner {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 860px) {
+      .nav-links a:not(.button) {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding-top: 34px;
+      }
+
+      .hero-copy {
+        padding-bottom: 0;
+      }
+
+      .hero-points,
+      .feature-grid,
+      .screens,
+      .cta-box {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav {
+        min-height: 68px;
+      }
+
+      .brand {
+        font-size: 1rem;
+      }
+
+      .nav .button {
+        min-height: 44px;
+        padding: 0 15px;
+      }
+
+      .hero {
+        width: min(calc(100% - 24px), var(--max));
+        padding-bottom: 44px;
+      }
+
+      h1 {
+        font-size: clamp(3.9rem, 18vw, 5.6rem);
+      }
+
+      .hero-points {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .section {
+        padding: 54px 12px;
+      }
+
+      .feature,
+      .screen-card,
+      .cta-box {
+        border-radius: 26px;
+        padding: 22px;
+      }
+
+      .word {
+        font-size: 3.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="メインナビゲーション">
+      <a class="brand" href="#">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5V5.8A2.8 2.8 0 0 1 6.8 3H20v16H6.8A2.8 2.8 0 0 0 4 21"/>
+            <path d="M8 7h8M8 11h6"/>
+          </svg>
+        </span>
+        サクタン
+      </a>
+      <div class="nav-links">
+        <a href="#features">特徴</a>
+        <a href="#screens">画面</a>
+        <a class="button button-primary" href="#start">はじめる</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <span class="eyebrow">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m5 12 5 5L20 7"/>
+          </svg>
+          スワイプ特化の単語学習
+        </span>
+        <h1 id="hero-title">サクタン</h1>
+        <p class="lead">通学中も休憩中も、知ってる・知らないをスワイプするだけ。英単語をテンポよく仕分けて、覚えるべき単語にすぐ戻れます。</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#start">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 19.5V5.8A2.8 2.8 0 0 1 6.8 3H20v16H6.8A2.8 2.8 0 0 0 4 21"/>
+              <path d="M10 8h6M10 12h4"/>
+            </svg>
+            全単語を練習
+          </a>
+          <a class="button button-ghost" href="#screens">画面を見る</a>
+        </div>
+        <div class="hero-points" aria-label="サクタンのポイント">
+          <div class="point"><span>1回</span>20語から</div>
+          <div class="point"><span>操作</span>スワイプ中心</div>
+          <div class="point"><span>範囲</span>中学から受験</div>
+        </div>
+      </div>
+      <div class="phone-wrap" aria-label="サクタンのアプリ画面">
+        <img src="assets/app-preview.svg" alt="サクタンの学習カード画面">
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <h2>短い時間で、迷わず進む。</h2>
+            <p>単語帳を開くまでの面倒を減らし、覚えているかどうかの判断に集中できる学習体験です。</p>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <article class="feature">
+            <span class="feature-icon" aria-hidden="true">
+              <svg width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 3 4 7l4 4"/><path d="M4 7h11a5 5 0 0 1 0 10h-1"/>
+              </svg>
+            </span>
+            <h3>左右スワイプで仕分け</h3>
+            <p>知らない単語は弱点へ、覚えた単語は習得へ。片手でサクサク処理できます。</p>
+          </article>
+          <article class="feature">
+            <span class="feature-icon" aria-hidden="true">
+              <svg width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/>
+              </svg>
+            </span>
+            <h3>デッキを選ぶだけ</h3>
+            <p>中学1年から難関大学まで、レベル別デッキを用意。ごちゃ混ぜ学習にも対応します。</p>
+          </article>
+          <article class="feature">
+            <span class="feature-icon" aria-hidden="true">
+              <svg width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-6"/>
+              </svg>
+            </span>
+            <h3>復習すべき単語が残る</h3>
+            <p>弱点・復習・習得率が見えるので、次に何をやるかがすぐ決まります。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark-band" id="screens">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <h2>ポップだけど、学習に集中できる。</h2>
+            <p>濃紺とミントを基調に、ボタンや進捗は大きく整理。暗色・明色どちらの画面にも馴染むトーンです。</p>
+          </div>
+        </div>
+        <div class="screens">
+          <article class="screen-card">
+            <div class="study-card">
+              <div class="study-top">
+                <span class="level">高1</span>
+                <span>タップで答え</span>
+              </div>
+              <div class="word">ambitious</div>
+              <div class="pron">/aem-bish-uhs/</div>
+              <div class="meaning">形容詞</div>
+              <div class="answer-row">
+                <span class="no"><span class="answer-mark">×</span>知らない</span>
+                <span class="yes"><span class="answer-mark">○</span>知ってる</span>
+              </div>
+            </div>
+          </article>
+          <article class="screen-card">
+            <div>
+              <h3 style="margin:0 0 18px;font-size:2rem;line-height:1.2;">ごちゃ混ぜ設定</h3>
+              <div class="deck-list">
+                <div class="deck-item"><strong>中学1年</strong><span>基礎の動詞・名詞から始める・300語</span></div>
+                <div class="deck-item"><strong>高校1年</strong><span>共通テスト基礎レベル・800語</span></div>
+                <div class="deck-item"><strong>難関大学</strong><span>難関大長文に出る高頻度語・1,500語</span></div>
+              </div>
+            </div>
+            <a class="button button-primary" href="#start">ごちゃ混ぜ学習を開始</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="start">
+      <div class="cta-box">
+        <div>
+          <h2>今日の隙間時間を、20語だけ。</h2>
+          <p>大きな準備はいりません。カードをめくって、知ってるかどうかを選ぶだけで復習が進みます。</p>
+        </div>
+        <a class="button button-primary" href="#" aria-label="サクタンをはじめる">サクッとはじめる</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>© サクタン</span>
+      <a href="privacy.html">プライバシーポリシー</a>
+    </div>
+  </footer>
+</body>
+</html>
