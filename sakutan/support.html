@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サクタン | サポート</title>
+  <meta name="description" content="サクタンのサポートページ。お問い合わせ、プレミアム購入、サブスクリプション、よくある質問を案内します。">
+  <style>
+    :root {
+      --ink: #111d35;
+      --muted: #718096;
+      --bg: #effbf8;
+      --mint: #1fc0a0;
+      --mint-soft: #e8f7f3;
+      --line: #d6ebe6;
+      --white: #ffffff;
+      --shadow: 0 18px 46px rgba(11, 37, 62, 0.1);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(31, 192, 160, 0.16), transparent 24rem),
+        var(--bg);
+      line-height: 1.9;
+    }
+
+    a {
+      color: var(--mint);
+      font-weight: 800;
+    }
+
+    .header {
+      border-bottom: 1px solid rgba(17, 29, 53, 0.08);
+      background: rgba(239, 251, 248, 0.86);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      width: min(calc(100% - 32px), 920px);
+      min-height: 72px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: var(--mint);
+      box-shadow: 0 12px 28px rgba(31, 192, 160, 0.24);
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      color: var(--ink);
+      text-decoration: none;
+      background: var(--white);
+      border: 2px solid var(--line);
+      font-size: 0.92rem;
+    }
+
+    .wrap {
+      width: min(calc(100% - 32px), 920px);
+      margin: 42px auto 64px;
+    }
+
+    .hero,
+    .card {
+      padding: clamp(22px, 4vw, 34px);
+      border-radius: 28px;
+      background: var(--white);
+      border: 2px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.24rem;
+      line-height: 1.4;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      color: var(--ink);
+      text-decoration: none;
+      background: var(--mint-soft);
+      border: 2px solid var(--line);
+      font-weight: 900;
+    }
+
+    @media (max-width: 560px) {
+      .nav,
+      .wrap {
+        width: min(calc(100% - 24px), 920px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav" aria-label="ナビゲーション">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5V5.8A2.8 2.8 0 0 1 6.8 3H20v16H6.8A2.8 2.8 0 0 0 4 21"/>
+            <path d="M8 7h8M8 11h6"/>
+          </svg>
+        </span>
+        サクタン
+      </a>
+      <a class="back" href="index.html">トップへ戻る</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>サポート</h1>
+      <p class="muted">サクタンの使い方、プレミアム購入、サブスクリプション、不具合についてのサポート情報です。</p>
+      <div class="links">
+        <a class="button" href="mailto:sakutan@gmail.com">メールで問い合わせる</a>
+        <a class="button" href="privacy.html">プライバシーポリシー</a>
+        <a class="button" href="terms.html">利用規約</a>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>お問い合わせ</h2>
+        <p>ご質問、不具合報告、データ削除依頼、購入に関する確認は、以下のメールアドレスまでご連絡ください。</p>
+        <p><a href="mailto:sakutan@gmail.com">sakutan@gmail.com</a></p>
+        <p class="muted">お問い合わせの際は、端末名、iOS/iPadOS のバージョン、アプリのバージョン、発生している問題の内容を添えてください。</p>
+      </section>
+
+      <section class="card">
+        <h2>プレミアムが反映されない場合</h2>
+        <ul>
+          <li>通信環境が安定していることを確認してください。</li>
+          <li>アプリ内の「購入を復元」を実行してください。</li>
+          <li>同じ Apple ID で購入しているか確認してください。</li>
+          <li>解決しない場合はサポートまでお問い合わせください。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>サブスクリプションの確認・解約</h2>
+        <p>サブスクリプションは Apple ID で管理されます。購入状況の確認、解約、更新停止は以下の Apple ページまたは iOS/iPadOS の設定アプリから行えます。</p>
+        <p><a href="https://apps.apple.com/account/subscriptions" target="_blank" rel="noopener noreferrer">https://apps.apple.com/account/subscriptions</a></p>
+      </section>
+
+      <section class="card">
+        <h2>アプリが正常に動作しない場合</h2>
+        <ul>
+          <li>アプリを最新版にアップデートしてください。</li>
+          <li>端末を再起動してください。</li>
+          <li>通信環境を切り替えて再度お試しください。</li>
+          <li>改善しない場合は、発生手順を添えてお問い合わせください。</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
